@@ -1,0 +1,23 @@
+{
+  "id": "691564b8-8fcb-4bc3-8652-b9f5246e8890",
+  "name": "SCPostOrders",
+  "publisher": "EthanSorenson",
+  "brief": "",
+  "description": "Web Service for posting Sales Orders and Invoices through the Odata web services",
+  "version": "1.0.0.0",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "capabilities": [],
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "13.0.0.0",
+  "application": "13.0.0.0",
+  "idRange": {
+    "from": 50100,
+    "to": 50149
+  },
+  "runtime": "2.0"
+}

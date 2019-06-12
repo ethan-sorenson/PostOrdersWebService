@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "al",
+            "request": "launch",
+            "name": "Localhost",
+            "server": "https://bc2019",
+            "serverInstance": "NAV",
+            "authentication": "UserPassword",
+            "startupObjectId": 50111,
+            "startupObjectType": "Page",
+            "breakOnError": true,
+            "schemaUpdateMode": "Recreate" 
+        }
+    ]
+}
