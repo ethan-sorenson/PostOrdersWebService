@@ -4,7 +4,7 @@
   "publisher": "EthanSorenson",
   "brief": "",
   "description": "Web Service for posting Sales Orders and Invoices through the Odata web services",
-  "version": "1.0.0.0",
+  "version": "1.0.0.1",
   "privacyStatement": "",
   "EULA": "",
   "help": "",
@@ -19,5 +19,6 @@
     "from": 50100,
     "to": 50149
   },
-  "runtime": "2.0"
+  "runtime": "2.4"
+  
 }
