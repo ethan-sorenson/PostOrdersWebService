@@ -1,0 +1,12 @@
+{
+    "@odata.type": "#NAV.SCPostTransactionBatch",
+    "ReplacePostingDate": "True",
+    "DocumentType": "Sales Invoice",
+    "DocumentDateTo": "2020-04-06",
+    "PostingDate": "2020-05-28",
+    "Ship": "True",
+    "CalcInvDiscount": "True",
+    "DocumentDateFrom": "2020-04-01",
+    "Invoice": "True",
+    "ReplaceDocumentDate": "False"
+  }

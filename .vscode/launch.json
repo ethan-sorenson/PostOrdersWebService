@@ -4,14 +4,14 @@
         {
             "type": "al",
             "request": "launch",
-            "name": "Localhost",
-            "server": "https://bc2019",
-            "serverInstance": "NAV",
-            "authentication": "UserPassword",
-            "startupObjectId": 50111,
+            "name": "Microsoft cloud sandbox",
+            "startupObjectId": 21,
             "startupObjectType": "Page",
             "breakOnError": true,
-            "schemaUpdateMode": "Recreate" 
+            "launchBrowser": true,
+            "enableLongRunningSqlStatements": true,
+            "enableSqlInformationDebugger": true,
+            "schemaUpdateMode":"Synchronize"
         }
     ]
 }

@@ -3,8 +3,8 @@
     <TenantWebServiceCollection>
         <TenantWebService>
             <ObjectType>Page</ObjectType>
-            <ServiceName>SCPostSalesOrders</ServiceName>
-            <ObjectID>50111</ObjectID>
+            <ServiceName>SCPostTransactionBatch</ServiceName>
+            <ObjectID>50211</ObjectID>
             <Published>true</Published>
         </TenantWebService>
     </TenantWebServiceCollection>

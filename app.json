@@ -1,24 +1,36 @@
 {
   "id": "691564b8-8fcb-4bc3-8652-b9f5246e8890",
-  "name": "SCPostOrders",
+  "name": "SC Web Service Posting",
   "publisher": "EthanSorenson",
   "brief": "",
-  "description": "Web Service for posting Sales Orders and Invoices through the Odata web services",
-  "version": "1.0.0.1",
+  "description": "Web Service for posting Sales and Purchasing Transactions through the Odata web services",
+  "version": "1.0.0.2",
   "privacyStatement": "",
   "EULA": "",
   "help": "",
   "url": "",
   "logo": "",
-  "capabilities": [],
-  "dependencies": [],
+  "dependencies": [
+    {
+      "id": "63ca2fa4-4f03-4f2b-a480-172fef340d3f",
+      "publisher": "Microsoft",
+      "name": "System Application",
+      "version": "16.0.0.0"
+    },
+    {
+      "id": "437dbf0e-84ff-417a-965d-ed2bb9650972",
+      "publisher": "Microsoft",
+      "name": "Base Application",
+      "version": "16.0.0.0"
+    }
+  ],
   "screenshots": [],
-  "platform": "13.0.0.0",
-  "application": "13.0.0.0",
-  "idRange": {
-    "from": 50100,
-    "to": 50149
-  },
-  "runtime": "2.4"
+  "platform": "16.0.0.0",
+  "application": "16.0.0.0",
+  "idRanges": [{
+    "from": 50200,
+    "to": 50249
+  }],
+  "runtime": "4.1"
   
 }
