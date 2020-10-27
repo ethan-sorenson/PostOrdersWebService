@@ -10,7 +10,7 @@ page 50211 "SC Post Transactions Batch"
     SourceTable = "SC Post Transactions";
     SourceTableTemporary = true;
     DelayedInsert = true;
-    ODataKeyFields = ID;
+    //ODataKeyFields = SystemId;
     DeleteAllowed = true;
     ModifyAllowed = false;
 

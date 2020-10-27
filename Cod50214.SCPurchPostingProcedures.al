@@ -29,7 +29,7 @@ codeunit 50214 "SC Purch Posting Procedures"
     procedure RunBatch(var PurchaseHeader: Record "Purchase Header"; ReplacePostingDate: Boolean; PostingDate: Date; ReplaceDocumentDate: Boolean; CalcInvoiceDiscount: Boolean; Receive: Boolean; Invoice: Boolean)
     var
         TempErrorMessage: Record "Error Message" temporary;
-        BatchPostParameterTypes: Codeunit "Batch Post Parameter Types";
+        BatchPostParameterTypes: Enum "Batch Posting Parameter Type";
         PurchaseBatchPostMgt: Codeunit "Purchase Batch Post Mgt.";
         ErrorMessages: Page "Error Messages";
         ErrorText: Text;
@@ -44,12 +44,12 @@ codeunit 50214 "SC Purch Posting Procedures"
         if ReplacePostingDate and (PostingDate = 0D) then
             Error(PostingDateIsNotSetErr);
 
-        BatchProcessingMgt.AddParameter(BatchPostParameterTypes.Invoice, Invoice);
-        BatchProcessingMgt.AddParameter(BatchPostParameterTypes.Receive, Receive);
-        BatchProcessingMgt.AddParameter(BatchPostParameterTypes.CalcInvoiceDiscount, CalcInvoiceDiscount);
-        BatchProcessingMgt.AddParameter(BatchPostParameterTypes.PostingDate, PostingDate);
-        BatchProcessingMgt.AddParameter(BatchPostParameterTypes.ReplacePostingDate, ReplacePostingDate);
-        BatchProcessingMgt.AddParameter(BatchPostParameterTypes.ReplaceDocumentDate, ReplaceDocumentDate);
+        BatchProcessingMgt.SetParameter(BatchPostParameterTypes::Invoice, Invoice);
+        BatchProcessingMgt.SetParameter(BatchPostParameterTypes::Receive, Receive);
+        BatchProcessingMgt.SetParameter(BatchPostParameterTypes::"Calculate Invoice Discount", CalcInvoiceDiscount);
+        BatchProcessingMgt.SetParameter(BatchPostParameterTypes::"Posting Date", PostingDate);
+        BatchProcessingMgt.SetParameter(BatchPostParameterTypes::"Replace Posting Date", ReplacePostingDate);
+        BatchProcessingMgt.SetParameter(BatchPostParameterTypes::"Replace Document Date", ReplaceDocumentDate);
 
         ErrorMessageMgt.PushContext(ErrorContextElement, DATABASE::"Purchase Header", 0, BatchPostingMsg);
         PurchaseBatchPostMgt.SetBatchProcessor(BatchProcessingMgt);
@@ -102,25 +102,25 @@ codeunit 50214 "SC Purch Posting Procedures"
 
     local procedure PreparePurchaseHeader(var PurchaseHeader: Record "Purchase Header"; var BatchConfirm: Option)
     var
-        BatchPostParameterTypes: Codeunit "Batch Post Parameter Types";
+        BatchPostParameterTypes: Enum "Batch Posting Parameter Type";
         CalcInvoiceDiscont: Boolean;
         ReplacePostingDate: Boolean;
         PostingDate: Date;
     begin
-        BatchProcessingMgt.GetParameterBoolean(PurchaseHeader.RecordId, BatchPostParameterTypes.CalcInvoiceDiscount, CalcInvoiceDiscont);
-        BatchProcessingMgt.GetParameterBoolean(PurchaseHeader.RecordId, BatchPostParameterTypes.ReplacePostingDate, ReplacePostingDate);
-        BatchProcessingMgt.GetParameterDate(PurchaseHeader.RecordId, BatchPostParameterTypes.PostingDate, PostingDate);
+        BatchProcessingMgt.GetBooleanParameter(PurchaseHeader.RecordId, BatchPostParameterTypes::"Calculate Invoice Discount", CalcInvoiceDiscont);
+        BatchProcessingMgt.GetBooleanParameter(PurchaseHeader.RecordId, BatchPostParameterTypes::"Replace Posting Date", ReplacePostingDate);
+        BatchProcessingMgt.GetDateParameter(PurchaseHeader.RecordId, BatchPostParameterTypes::"Posting Date", PostingDate);
 
         if CalcInvoiceDiscont then
             CalculateInvoiceDiscount(PurchaseHeader);
 
         PurchaseHeader.BatchConfirmUpdateDeferralDate(BatchConfirm, ReplacePostingDate, PostingDate);
 
-        BatchProcessingMgt.GetParameterBoolean(PurchaseHeader.RecordId, BatchPostParameterTypes.Receive, PurchaseHeader.Receive);
-        BatchProcessingMgt.GetParameterBoolean(PurchaseHeader.RecordId, BatchPostParameterTypes.Invoice, PurchaseHeader.Invoice);
-        BatchProcessingMgt.GetParameterBoolean(PurchaseHeader.RecordId, BatchPostParameterTypes.Ship, PurchaseHeader.Ship);
-        BatchProcessingMgt.GetParameterBoolean(
-          PurchaseHeader.RecordId, BatchPostParameterTypes.Print, PurchaseHeader."Print Posted Documents");
+        BatchProcessingMgt.GetBooleanParameter(PurchaseHeader.RecordId, BatchPostParameterTypes::Receive, PurchaseHeader.Receive);
+        BatchProcessingMgt.GetBooleanParameter(PurchaseHeader.RecordId, BatchPostParameterTypes::Invoice, PurchaseHeader.Invoice);
+        BatchProcessingMgt.GetBooleanParameter(PurchaseHeader.RecordId, BatchPostParameterTypes::Ship, PurchaseHeader.Ship);
+        BatchProcessingMgt.GetBooleanParameter(
+          PurchaseHeader.RecordId, BatchPostParameterTypes::Print, PurchaseHeader."Print Posted Documents");
 
         OnAfterPreparePurchaseHeader(PurchaseHeader);
     end;
@@ -160,13 +160,6 @@ codeunit 50214 "SC Purch Posting Procedures"
         exit(true);
     end;
 
-    procedure AddParameter(ParameterId: Integer; ParameterValue: Variant)
-    var
-        ResultBatchProcessingMgt: Codeunit "Batch Processing Mgt.";
-    begin
-        GetBatchProcessor(ResultBatchProcessingMgt);
-        ResultBatchProcessingMgt.AddParameter(ParameterId, ParameterValue);
-    end;
 
     [EventSubscriber(ObjectType::Codeunit, 1380, 'OnBeforeBatchProcessing', '', false, false)]
     local procedure PreparePurchaseHeaderOnBeforeBatchProcessing(var RecRef: RecordRef; var BatchConfirm: Option)

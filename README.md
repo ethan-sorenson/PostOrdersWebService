@@ -34,5 +34,6 @@ The Codeunits [Cod50213.SCSalesPostingProcedures.al](Cod50213.SCSalesPostingProc
 ### Updates
 * 1.0.0.1 first release on BC v14
 * 1.0.0.2 updated for BC v16, added support for Purchase Transactions
+* 1.0.0.3 updated for BC v17, replaced obsolete references
 
 ***Enjoy!***
